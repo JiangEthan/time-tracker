@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工时管理系统</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/mobile.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1>工时管理系统</h1>
+            <div class="header-actions">
+                <button id="addRecordBtn" class="btn btn-primary">添加记录</button>
+                <button id="statsBtn" class="btn btn-secondary">统计</button>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main">
+            <!-- 添加/编辑记录表单 -->
+            <div id="recordForm" class="card form-container" style="display: none;">
+                <h2 id="formTitle">添加打卡记录</h2>
+                <form id="timeRecordForm">
+                    <input type="hidden" id="recordId">
+                    
+                    <div class="form-group">
+                        <label for="date">日期</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="checkInTime">上班时间</label>
+                        <input type="time" id="checkInTime" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="checkOutTime">下班时间</label>
+                        <input type="time" id="checkOutTime" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="note">备注</label>
+                        <textarea id="note" rows="3" maxlength="200"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">保存</button>
+                        <button type="button" id="cancelBtn" class="btn btn-secondary">取消</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 统计面板 -->
+            <div id="statsPanel" class="stats-panel" style="display: none;">
+                <div class="stats-tabs">
+                    <button class="tab-btn active" data-tab="daily">今日</button>
+                    <button class="tab-btn" data-tab="weekly">本周</button>
+                    <button class="tab-btn" data-tab="monthly">本月</button>
+                </div>
+                
+                <div id="dailyStats" class="stats-content">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>今日工时</h3>
+                            <p class="stat-value" id="todayWorkHours">0小时</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>加班时间</h3>
+                            <p class="stat-value" id="todayOvertime">0小时</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="weeklyStats" class="stats-content" style="display: none;">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>本周总工时</h3>
+                            <p class="stat-value" id="weekWorkHours">0小时</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>本周加班</h3>
+                            <p class="stat-value" id="weekOvertime">0小时</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>工作天数</h3>
+                            <p class="stat-value" id="weekWorkDays">0天</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="monthlyStats" class="stats-content" style="display: none;">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>本月总工时</h3>
+                            <p class="stat-value" id="monthWorkHours">0小时</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>本月加班</h3>
+                            <p class="stat-value" id="monthOvertime">0小时</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>工作天数</h3>
+                            <p class="stat-value" id="monthWorkDays">0天</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 记录列表 -->
+            <div class="records-section">
+                <div class="section-header">
+                    <h2>打卡记录</h2>
+                    <div class="filter-controls">
+                        <input type="month" id="monthFilter" placeholder="选择月份">
+                        <button id="clearFilterBtn" class="btn btn-link">清除</button>
+                    </div>
+                </div>
+                
+                <!-- PC端表格视图 -->
+                <div class="table-container pc-only">
+                    <table class="records-table">
+                        <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>上班时间</th>
+                                <th>下班时间</th>
+                                <th>工时</th>
+                                <th>加班</th>
+                                <th>备注</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recordsTableBody">
+                            <!-- 记录将通过JavaScript动态添加 -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 移动端卡片视图 -->
+                <div id="recordsList" class="records-list mobile-only">
+                    <!-- 记录卡片将通过JavaScript动态添加 -->
+                </div>
+                
+                <!-- 分页控件 -->
+                <div id="pagination" class="pagination">
+                    <!-- 分页按钮将通过JavaScript动态添加 -->
+                </div>
+            </div>
+        </main>
+
+        <!-- 提示消息 -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <!-- 加载JavaScript -->
+    <script src="/js/api.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>

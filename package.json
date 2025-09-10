@@ -1,0 +1,26 @@
+{
+  "name": "time-tracker",
+  "version": "1.0.0",
+  "description": "A lightweight time tracking system for personal use",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init-db": "node src/scripts/init-database.js"
+  },
+  "keywords": ["time", "tracking", "work", "hours"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "body-parser": "^1.20.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
